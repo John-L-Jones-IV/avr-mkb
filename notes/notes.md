@@ -43,10 +43,73 @@ where
 
 ARV GCC Blinky Example
 
+# Tinking and Wandering
+So I started down a journey to see what I don't know about the compiling high-
+level languages and their associated tool chains.
+
+My understanding now is as follows (for my notes only) here is a link to an
+in-depth video:
+
+1. Preprocess.
+In the C language this is the "#" statements like #define #if #include...
+The preprocessor will look at these and replace them with more C-code.
+
+2. Compile.
+Now that you have a complete block of C code the compiler can now turn that into
+*machine specific* assembly language code. This will only work on 
+
+3. Assemble.
+Turn assemlby code into machine code.
+
+4. Link.
+Tie in all your pieces and their dependencies into a complete executable, 
+including and other references they may need. 
+
+Side bar story for libc and libm and include them with -lc and -lm respectivly.
+HOWEVER, -lc is always there by default
+
+Okay, so this seems great, but I've had my mcu dev board for a few days now and
+I haven't even seen the thing blink yet...
 
 
-***
-So I started down a rabit hole, and now I'm here...
+# Just get something to work
+Looking at
+www.nongnu.org/avr-libc/user-manual/group__demo__project.html
 
+as a base-line to get a blinky.c program to work.
 
+first thing is inttypes.h not found
 
+it was in the toolpath
+
+so let's make the file simpler and remove it. let's just get somehting to compile.
+
+now it says -lm and -lc aren't found. hello, old friend, we meet again.
+
+first problem those pesky -lc and -lm files aren't appearing.
+
+good ol' apt install avr-libc fixed that right up.
+
+and now I'll even get #include <inttypes.h> to work.
+
+avr-gcc -S main.c yields: commit 'init demo.s'
+
+queue another tangent into AVR assemlby language....
+
+## Searching for a Simulator
+I wish MiSaSim was a thing for the AVR assembly language. Shout out to Linda
+Wills.
+
+The closest thing I settled on was Microchip Studio... Like the old one. And
+I selected Atmega32 b/c the 32u4 did not have a simulator built. 
+
+Hackaday has an excellent video on AVR's from the guy who made Wokwi, an online arduino simulator.
+
+Somewhere along the way I stumbled across embeeded C standard to minimize errors and volitile should always be used for accessing registers.
+
+# Back to Blinky.c
+PD5 is the guy.
+
+I understand where the registers are being defined now! I could use my own
+(*(volitile uint8_t* 0Xff)) type definitons, but I think I know where they come
+from good enough now.
