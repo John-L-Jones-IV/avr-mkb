@@ -10,10 +10,10 @@
 // #define DDD5 5
 // #define PORTD (*(volatile uint8_t* 0x2B))
 // #define PORTD5 5
-// #define TCCR1A _SFR_MEM8(0x80) // 0xA0?
-// #define TCCR1B _SFR_MEM8(0x81) // 0xA1?
+// #define TCCR1A _SFR_MEM8(0x80)
+// #define TCCR1B _SFR_MEM8(0x81)
 // #define CS12 2
-// #define TIMSK1 _SFR_MEM8(0x6F) // 0x8F?
+// #define TIMSK1 _SFR_MEM8(0x6F)
 // #define TOIE1 0
 
 
