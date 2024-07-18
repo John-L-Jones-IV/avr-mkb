@@ -113,3 +113,10 @@ PD5 is the guy.
 I understand where the registers are being defined now! I could use my own
 (*(volitile uint8_t* 0Xff)) type definitons, but I think I know where they come
 from good enough now.
+
+
+got avr dude to work... but it was NOT straight forward... thank reddit for making
+that clear... I don't understand ports.
+
+And you have to play a very delicate game of press reset at the right time for all
+the handshakes to occur properly.
