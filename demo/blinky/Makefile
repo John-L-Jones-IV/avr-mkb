@@ -1,7 +1,7 @@
 SRC = main
 CC = avr-gcc
 MCU = atmega32u4
-CFLAGS = -g -Wall -Wpedantic -Werror
+CFLAGS = -g0 -Os -Wall -Wpedantic -Werror
 
 # help:
 # 	@echo 'backup       Read all known memory types from controller and write it into a file. Available memory types: $(memoryTypes)'
@@ -20,10 +20,13 @@ CFLAGS = -g -Wall -Wpedantic -Werror
 
 $(SRC).hex: $(SRC).out
 	@echo "running avr-objcopy"
-	avr-objcopy -O ihex -j .text -j .data $(SRC).out $(SRC).hex
+	avr-objcopy -O ihex -j .text -j .data $(SRC).o $(SRC).hex
 
 $(SRC).out: $(SRC).c
 	$(CC) $(CFLAGS) -mmcu=$(MCU) $(SRC).c -o $(SRC).out
+
+$(SRC).o: $(SRC).c
+	$(CC) $(CFLAGS) -mmcu=$(MCU) -c $(SRC).c
 
 $(SRC).s: $(SRC).c
 	$(CC) $(CFLAGS) -mmcu=$(MCU) -fverbose-asm -S $(SRC).c

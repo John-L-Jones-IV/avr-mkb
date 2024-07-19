@@ -120,3 +120,7 @@ that clear... I don't understand ports.
 
 And you have to play a very delicate game of press reset at the right time for all
 the handshakes to occur properly.
+
+
+An intersting experiment here:
+https://stackoverflow.com/questions/67556902/convert-a-compiled-c-program-to-shellcode-hex

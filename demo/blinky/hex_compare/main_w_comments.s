@@ -64,9 +64,9 @@ main:
 	sei
  ;  0 "" 2
 /* #NOAPP */
-	ldi r24,lo8(-128) ; r24 = 0x80?
+	ldi r24,lo8(-128) ; r24 = 0x80
 	ldi r25,0
-	movw r30,r24	  ; Z = [r24:25]
+	movw r30,r24	  ; Z = [r24:25] = 0x80
 	st Z,__zero_reg__ ; TCCR1A = 0
 	ldi r24,lo8(-127) ; r24 = 0x81
 	ldi r25,0
