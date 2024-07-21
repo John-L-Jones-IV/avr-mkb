@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+"""
+This was fun 'n all, but let's just use avr-objdump -d...
+"""
 import sys
 from enum import Enum
 

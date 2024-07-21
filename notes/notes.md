@@ -124,3 +124,24 @@ the handshakes to occur properly.
 
 An intersting experiment here:
 https://stackoverflow.com/questions/67556902/convert-a-compiled-c-program-to-shellcode-hex
+
+
+## Why is there so much extra code
+
+The elf file contains much more than exectuable code, it contains debugging info
+compiler info, and other meta data.
+
+yeah, but why is there so much extra code in the .text section? Isn't that
+supposed to be all executabel?
+
+yes, yes, it is, but you need a vector table and the startup code..
+
+stepping through verbose output of avr-gcc and with the help of some starckover
+flow posts.
+
+First the program space is set with a vector table, be belevie the intterupt
+handler would set the pc to that location in table which would point to the section
+of the ISR code, note how the ISR ends in a return interrupt assemlby line.
+
+Then there is boiler plate code to set the status register in a known condition and
+intialzalize the stack poitner this boiler plate comes from a 

@@ -6,9 +6,3 @@
 
 # avr109?
 avrdude -p m32u4 -P /dev/ttyACM0 -c avr109 -C /etc/avrdude.conf -v -U flash:w:main.hex
-
-# -n for no write!
-
-# other things?
-# avrdude -F -C /etc/avrdude.conf -v -p atmega32u4 -c flip1 -P /dev/ttyACM0 -U flash:w:main.hex
-# avrdude -F -C /etc/avrdude.conf -v -p atmega32u4 -c flip1 -U flash:w:main.hex
