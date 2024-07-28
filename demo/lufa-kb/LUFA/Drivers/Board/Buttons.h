@@ -160,6 +160,10 @@
 			#include "XMEGA/C3_XPLAINED/Buttons.h"
 		#elif (BOARD == BOARD_U2S)
 			#include "AVR8/U2S/Buttons.h"
+		#elif (BOARD == BOARD_LEONARDO)
+			#include "AVR8/LEONARDO/Buttons.h"
+		#elif (BOARD == BOARD_PROMICRO)
+			#include "AVR8/PROMICRO/Buttons.h"
 		#else
 			#include "Board/Buttons.h"
 		#endif
