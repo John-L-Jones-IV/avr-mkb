@@ -145,3 +145,7 @@ of the ISR code, note how the ISR ends in a return interrupt assemlby line.
 
 Then there is boiler plate code to set the status register in a known condition and
 intialzalize the stack poitner this boiler plate comes from a 
+
+## So I'm making my own USB stack huh? What even is a USB stack?
+https://kampi.gitbook.io/avr/lets-use-usb
+
