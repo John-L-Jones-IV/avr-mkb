@@ -14,11 +14,19 @@ OPTIMIZATION = s
 TARGET       = Keyboard
 SRC          = $(TARGET).c Descriptors.c $(LUFA_SRC_USB) $(LUFA_SRC_USBCLASS)
 LUFA_PATH    = ../LUFA
-CC_FLAGS     = -C -DUSE_LUFA_CONFIG_HEADER -IConfig/
+CC_FLAGS     = -DUSE_LUFA_CONFIG_HEADER -IConfig/
+CC_FLAGS	 += -I/../LUFA
 LD_FLAGS     =
 
 # Default target
 all:
+
+preprocess:
+	avr-gcc -E $(CFLAGS) -mmcu=$(MCU) -I$(LUFA_PATH) Keyboard.c -o Keyboard.i
+
+assy:
+	avr-gcc -E $(CFLAGS) -mmcu=$(MCU) -I$(LUFA_PATH) -I$(LUFA_SRC_USB) -S $(SRC)
+
 
 # Include LUFA-specific DMBS extension modules
 DMBS_LUFA_PATH ?= $(LUFA_PATH)/Build/LUFA
@@ -35,3 +43,5 @@ include $(DMBS_PATH)/gcc.mk
 include $(DMBS_PATH)/hid.mk
 include $(DMBS_PATH)/avrdude.mk
 include $(DMBS_PATH)/atprogram.mk
+
+
