@@ -1,2 +1,5 @@
 *.o
 *.out
+*Wireshark*
+*.vscode
+*sandbox*
