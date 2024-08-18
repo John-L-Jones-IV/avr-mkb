@@ -64,19 +64,35 @@
 //				Read value used to indicate the state of the v bus
 //			
 //
+#include <stdbool.h>
+
 #include "usb.h"
 
+bool USB_IsInitialized = false;
 int USB_init(void);
 
 int main(void) {
 	USB_init();
 
+	for(;;){
+		;
+	}
+
 	return 0;
 }
+
 
 int USB_init(void) {
+	USB_Reset();
+	USB_ClearFreezeClock();
 	USB_Pad_Regulator_Enable();
-
+	USB_OTGPAD_On();
+	// PLLFREQ = (1 << PDIV2); ? Is this needed for USB 48 MHz?
+	USB_Attach();
+	USB_Device_SetFullSpeed();
+	USB_IsInitialized = true;
 	return 0;
 }
+
+// activate endpoint see DS pg. 271
 	
