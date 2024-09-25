@@ -2,6 +2,9 @@
  *
  * See ATmega32U4 datasheet for more information regarding the USB Controller.
  * Atmel-7766J-USB-ATmega16U4/32U4-Datasheet_04/2016
+ * 
+ * https://kampi.gitbook.io/avr/lets-use-usb/initialize-the-usb-as-a-usb-device
+ *
  */
 #pragma once
 
@@ -40,15 +43,21 @@ static inline void USB_OTGPAD_Off(void) {
 }
 
 
-static inline void USB_OTGPAD_On(void) ATTR_ALWAYS_INLINE;
-static inline void USB_OTGPAD_On(void) {
-	USBCON |= (1 << OTGPADE);
+static inline void USB_VBUSActivate(void) ATTR_ALWAYS_INLINE;
+static inline void USB_VBUSActivate(void) {
+	USBCON |= (1 << VBUSTE);
 }
 
 
 static inline void USB_Device_SetFullSpeed(void) ATTR_ALWAYS_INLINE;
 static inline void USB_Device_SetFullSpeed(void) {
 	UDCON &= ~(1 << LSM);
+}
+
+
+static inline void USB_Device_SetLowSpeed(void) ATTR_ALWAYS_INLINE;
+static inline void USB_Device_SetLowSpeed(void) {
+	UDCON |= (1 << LSM);
 }
 
 

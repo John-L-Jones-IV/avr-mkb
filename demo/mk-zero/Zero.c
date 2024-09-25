@@ -71,6 +71,23 @@
 bool USB_IsInitialized = false;
 int USB_init(void);
 
+
+int ISR(USB_GEN_vect) {
+	if (USBINT & (1 << VBUSTI)) {
+		USBINT &= ~(1 << VBUSTI);
+		if (USBSTA & (1 << VBUS)) {
+			// PLLCSR = ((1 << PLLP1) | (1 << PLL0) | (1 << PLLE));
+			while (!(PLLCSR & (1 << PLOCK)));
+			_USBDeviceState = USB_STATE_POWERED;
+		}
+		else {
+			PLLCSR = 0x00;
+			_USBDeviceStaet = USB_STATE_UNATTACHED;
+		}
+	}
+}
+
+
 int main(void) {
 	USB_init();
 
@@ -88,6 +105,7 @@ int USB_init(void) {
 	USB_Pad_Regulator_Enable();
 	USB_OTGPAD_On();
 	// PLLFREQ = (1 << PDIV2); ? Is this needed for USB 48 MHz?
+	USB_VBUSActivate();
 	USB_Attach();
 	USB_Device_SetFullSpeed();
 	USB_IsInitialized = true;
